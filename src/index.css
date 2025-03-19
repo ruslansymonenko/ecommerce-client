@@ -17,3 +17,10 @@ a.active hr {
     font-style: normal;
     font-variation-settings: "wdth" 100;
 }
+
+@media (max-width:640px) {
+    a.active {
+        background-color: black;
+        color: white;
+    }
+}
