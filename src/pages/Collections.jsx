@@ -29,7 +29,7 @@ const subcategories = [
 ];
 
 const Collections = () => {
-  const { products } = useContext(ShopContext);
+  const { products, search, showSearch } = useContext(ShopContext);
   const [showFilter, setShowFilter] = useState(false);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [categoryFilters, setCategoryFilters] = useState([]);
@@ -53,10 +53,14 @@ const Collections = () => {
   };
 
   const applyFilter = () => {
-    let filteredProducts = products;
+    let filtered = products;
+
+    if (showSearch && search) {
+      filtered = filtered.filter((item) => item.name.toLowerCase().includes(search.toLowerCase()));
+    }
 
     if (categoryFilters.length > 0 || subcategoryFilters.length > 0) {
-      filteredProducts = products.filter((item) => {
+      filtered = filtered.filter((item) => {
         const categoryMatch =
           categoryFilters.length > 0 ? categoryFilters.includes(item.category) : true;
         const subcategoryMatch =
@@ -66,7 +70,7 @@ const Collections = () => {
       });
     }
 
-    setFilteredProducts(filteredProducts);
+    setFilteredProducts(filtered);
   };
 
   const sortProducts = () => {
@@ -88,7 +92,7 @@ const Collections = () => {
   useEffect(() => {
     applyFilter();
     setSortType('relevant');
-  }, [categoryFilters, subcategoryFilters]);
+  }, [categoryFilters, subcategoryFilters, search, showSearch]);
 
   useEffect(() => {
     sortProducts();
