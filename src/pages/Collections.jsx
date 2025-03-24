@@ -155,7 +155,7 @@ const Collections = () => {
         <div className="flex justify-between text-base sm:text-2xl mb-4">
           <Title titleStart="ALL" titleEnd="COLLECTIONS"></Title>
           <select
-            className="border-2 bg-gray-100 text-sm px-2"
+            className="border-1 bg-gray-100 text-sm px-2"
             value={sortType}
             onChange={(event) => setSortType(event.target.value)}
           >
